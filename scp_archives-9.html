@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SCP Archives — Fondation</title>
+<style>
+:root{--bg:#07090c;--panel:#10141a;--panel2:#151b22;--line:#29313a;--text:#edf2f7;--muted:#9ca8b4;--red:#d62828;--red2:#ff4747}
+*{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 70% -10%,#251010 0,#07090c 38%);color:var(--text);font-family:Inter,system-ui,Arial,sans-serif}
+header{position:sticky;top:0;z-index:10;background:#07090ceb;border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
+nav{max-width:1200px;margin:auto;padding:16px 22px;display:flex;align-items:center;gap:16px}.logo{font-weight:900;letter-spacing:2px}.logo span{color:var(--red2)}
+nav small{color:var(--muted);margin-left:auto}
+.hero{max-width:1200px;margin:auto;padding:70px 22px 35px}.badge{display:inline-block;border:1px solid #693333;color:#ff8d8d;padding:7px 11px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:1px}
+h1{font-size:clamp(42px,8vw,82px);line-height:.95;margin:18px 0 15px;letter-spacing:-4px}.hero p{max-width:700px;color:var(--muted);font-size:18px;line-height:1.6}
+.controls{max-width:1200px;margin:0 auto;padding:10px 22px 28px;display:flex;gap:10px;flex-wrap:wrap}.search{flex:1;min-width:240px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;color:white;font-size:16px;outline:none}.filter{background:var(--panel);color:white;border:1px solid var(--line);border-radius:12px;padding:12px}
+.grid{max-width:1200px;margin:auto;padding:0 22px 60px;display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px}
+.card{background:linear-gradient(180deg,#121820,#0d1116);border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:.2s}.card:hover{transform:translateY(-4px);border-color:#713838}
+.card img{width:100%;height:210px;object-fit:cover;background:#080a0d;display:block}.body{padding:18px}.num{font-size:12px;color:#ff7272;font-weight:900;letter-spacing:1px}.body h2{margin:7px 0;font-size:25px}.class{display:inline-block;font-size:11px;padding:5px 8px;border-radius:7px;background:#242b33;color:#cbd4dc}.body p{color:var(--muted);line-height:1.55}.more{width:100%;padding:11px;background:#1a2027;border:1px solid var(--line);color:white;border-radius:10px;cursor:pointer;font-weight:700}.more:hover{background:#252d36}
+footer{border-top:1px solid var(--line);padding:28px 22px;color:var(--muted);text-align:center;font-size:13px}
+.modal{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;padding:20px;z-index:20}.modal.open{display:flex}.dialog{max-width:850px;width:100%;max-height:90vh;overflow:auto;background:#0d1217;border:1px solid var(--line);border-radius:18px;padding:24px}.dialog img{width:100%;max-height:360px;object-fit:cover;border-radius:12px}.close{float:right;background:none;border:0;color:white;font-size:26px;cursor:pointer}.danger{border-left:3px solid var(--red);padding:12px 15px;background:#1b1011;color:#ffb0b0}
+@media(max-width:600px){nav small{display:none}.hero{padding-top:45px}h1{letter-spacing:-2px}}
+</style>
+
+<style>
+.guard-grid .card img{height:230px;object-fit:cover}
+.access-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:24px}
+.access-card{position:relative;overflow:hidden;display:grid;grid-template-columns:130px 1fr;gap:16px;padding:14px;border-radius:16px;border:1px solid #39434e;background:linear-gradient(135deg,#e8ebee,#aab2bb 55%,#252a31);color:#0b0d10;box-shadow:0 12px 35px #0007}
+.access-card img{width:130px;height:155px;object-fit:cover;border-radius:10px;background:#111}
+.access-card strong{display:block;font-size:15px;letter-spacing:1px;margin:16px 0 8px}
+.access-card small{display:block;font-size:11px;font-weight:800;margin-bottom:13px;opacity:.7}
+.access-logo{font-weight:1000;font-size:22px;letter-spacing:3px}
+.access-level{display:inline-block;padding:6px 8px;border-radius:5px;color:#fff;font-size:10px;font-weight:900;letter-spacing:.7px}
+.l2{background:#2563eb}.l3{background:#7c3aed}.l4{background:#b91c1c}
+</style>
+
+
+<style>
+.command-grid,.documents{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:22px}
+.command-card,.document{padding:20px;background:#11171d;border:1px solid #29313a;border-radius:14px}
+.command-card b{display:block;font-size:20px}.command-card span{display:block;color:#9ca8b4;margin:10px 0 16px;line-height:1.5}
+.command-card button,.sim-actions button,.random-btn,.document button{border:1px solid #414b55;background:#1a2128;color:#fff;padding:10px 12px;border-radius:9px;cursor:pointer;font-weight:800}
+.command-card button:hover,.sim-actions button:hover,.random-btn:hover,.document button:hover{background:#2b333c}
+.random-btn{background:#641d1d;border-color:#8c3030;padding:13px 18px}.random-result{margin-top:16px;padding:18px;background:#11171d;border:1px solid #29313a;border-radius:12px;color:#dfe5ea}
+.alarm-panel{border:1px solid #4a2b2b;border-radius:16px;background:#0b0e12;overflow:hidden}.alarm-head{padding:16px 18px;display:flex;justify-content:space-between;border-bottom:1px solid #392526}.alarm-head b{color:#ff7676}.alarm-head span{color:#8d99a4;font-size:12px}
+.sim-grid{display:grid;grid-template-columns:1.3fr 1fr}.map{min-height:330px;position:relative;background:linear-gradient(90deg,#10161c 1px,transparent 1px),linear-gradient(#10161c 1px,transparent 1px);background-size:35px 35px;border-right:1px solid #29313a}
+.map-label{position:absolute;top:12px;left:14px;color:#697681;font-size:11px;font-weight:900;letter-spacing:1px}.room{position:absolute;border:1px solid #53606b;background:#171e25;padding:35px 50px;color:#7e8b96}.r1{left:10%;top:30%}.r2{left:48%;top:25%}.r3{left:65%;top:58%}.r4{left:22%;top:65%}.danger-room{border-color:#7b3030}
+.scp-dot,.guard-dot{position:absolute;width:13px;height:13px;border-radius:50%;transition:.5s;z-index:3}.scp-dot{background:#ff3333;box-shadow:0 0 18px #ff3333;left:69%;top:63%}.guard-dot{background:#39a7ff;box-shadow:0 0 15px #39a7ff;left:27%;top:69%}
+.console{padding:18px}.terminal{min-height:180px;background:#050708;border:1px solid #20272e;border-radius:10px;padding:14px;color:#72ff8a;font:13px/1.7 monospace;white-space:pre-line}.sim-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}.document{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-family:monospace}.document span{color:#aeb7bf;flex:1}.document button{margin-left:auto}
+.breach-mode{animation:alarm .8s infinite alternate}.breach-mode .alarm-head{background:#2a0d0d}@keyframes alarm{to{box-shadow:inset 0 0 45px #ff00001f}}
+@media(max-width:700px){.sim-grid{grid-template-columns:1fr}.map{border-right:0;border-bottom:1px solid #29313a}.sim-actions{grid-template-columns:1fr}}
+</style>
+
+
+<style>
+.quick-nav{position:sticky;top:58px;z-index:9;display:flex;gap:8px;overflow-x:auto;padding:10px max(22px,calc((100% - 1156px)/2));background:#0a0d11ed;border-bottom:1px solid #29313a;backdrop-filter:blur(10px)}
+.quick-nav a{white-space:nowrap;text-decoration:none;color:#dfe5ea;background:#141a20;border:1px solid #29313a;padding:8px 11px;border-radius:999px;font-size:12px;font-weight:800}
+.quick-nav a:hover{border-color:#7b3a3a;background:#1d232a}
+.d-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;margin-top:22px}
+.d-card{display:grid;grid-template-columns:110px 1fr;gap:15px;padding:14px;border-radius:14px;border:1px solid #4b3827;background:linear-gradient(135deg,#17130f,#0f1216)}
+.d-photo{height:140px;border-radius:10px;background:linear-gradient(145deg,#252525,#111);display:flex;align-items:center;justify-content:center;color:#f59e0b;font-weight:1000;font-size:20px;letter-spacing:2px;border:1px solid #6b4a23}
+.d-info b{font-size:22px}.d-info span{display:block;color:#9ca8b4;font-size:12px;margin-top:8px}.d-info button{margin-top:13px;border:1px solid #6b4a23;background:#2a1d11;color:#f7c77a;padding:8px 10px;border-radius:8px;cursor:pointer;font-weight:800}
+.d-warning{margin-top:18px;padding:14px;border-left:3px solid #f59e0b;background:#1a140d;color:#d8b57a}
+</style>
+
+<style>
+.legend-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;margin-top:24px}
+.legend-card{padding:20px;border-radius:15px;background:linear-gradient(145deg,#151a20,#0d1116);border:1px solid #303944;box-shadow:0 10px 30px #0004}
+.legend-card:hover{border-color:#754040;transform:translateY(-2px)}
+.legend-card h3{font-size:24px;margin:8px 0}.legend-card p{color:#9ca8b4;line-height:1.55}.legend-num{color:#ff7373;font-size:12px;font-weight:900;letter-spacing:1.5px}
+.legend-card button{border:1px solid #454f59;background:#1b2229;color:#fff;border-radius:8px;padding:9px 12px;cursor:pointer;font-weight:800}
+#top-button{position:fixed;right:20px;bottom:20px;z-index:30;width:46px;height:46px;border-radius:50%;border:1px solid #5a3333;background:#171b20;color:#fff;cursor:pointer;font-size:18px;box-shadow:0 8px 25px #0008}
+</style>
+</head>
+<body>
+<header><nav><div class="logo">SCP <span>ARCHIVES</span></div><a href="#guards" style="color:#ff7272;text-decoration:none;font-weight:800;font-size:13px">GARDES</a><small>ACCÈS — NIVEAU 4</small></nav></header>
+
+<button id="top-button" onclick="window.scrollTo({top:0,behavior:'smooth'})">⬆️</button>
+<div class="quick-nav" aria-label="Navigation rapide">
+  <a href="#scp-db">👹 SCP</a>
+  <a href="#guards">🛡️ Gardes</a>
+  <a href="#access-cards">🪪 Cartes</a>
+  <a href="#class-d">🟠 Classe-D</a>
+  <a href="#foundation">🏢 Fondation</a>
+  <a href="#simulation">🚨 Simulation</a>
+  <a href="#documents">📄 Documents</a><a href="#legends">🏆 Légendes</a><a href="#access-cards">🔐 Accès</a>
+</div>
+
+
+<section class="hero">
+  <span class="badge">FONDATION SCP // DATABASE</span>
+  <h1>Les anomalies<br>n'ont plus de secrets.</h1>
+  <p>Explore une base de données fan-made dédiée aux SCP : classe, apparence, comportement, réactions et procédures de confinement.</p>
+</section>
+
+<div class="controls">
+  <input id="search" class="search" placeholder="Rechercher un SCP… ex. 096, Shy Guy, docteur">
+  <select id="filter" class="filter">
+    <option value="all">Toutes les classes</option><option value="Safe">Safe</option><option value="Euclid">Euclid</option><option value="Keter">Keter</option>
+  </select>
+</div>
+
+<main id="scp-db"><div id="grid" class="grid"></div></main>
+
+<div id="modal" class="modal" onclick="if(event.target===this)closeModal()">
+  <div class="dialog"><button class="close" onclick="closeModal()">×</button><div id="detail"></div></div>
+</div>
+
+
+
+<section id="guards" style="max-width:1200px;margin:0 auto;padding:55px 22px 70px;border-top:1px solid #29313a">
+  <span class="badge">FONDATION SCP // SÉCURITÉ</span>
+  <h2 style="font-size:42px;margin:16px 0 8px">🛡️ Section Gardes</h2>
+  <p style="color:#9ca8b4;max-width:760px;line-height:1.6">
+    Les agents de sécurité assurent la sécurité physique et informatique des installations,
+    du personnel et des projets. La documentation SCP décrit notamment les security officers
+    et les tactical response officers comme des personnels spécialisés dans la sécurité des sites.
+  </p>
+  <div class="grid guard-grid" style="padding:20px 0 0">
+    <article class="card"><img src="guard-standard.svg" alt="Garde SCP standard"><div class="body">
+      <div class="num">GARDE // STANDARD</div><h2>Agent de sécurité</h2><span class="class">Niveau 2</span>
+      <p>Contrôle des accès, surveillance des zones sensibles et première réponse aux incidents.</p>
+      <button class="more" onclick="guardModal('standard')">Voir le dossier →</button>
+    </div></article>
+    <article class="card"><img src="guard-officer.svg" alt="Officier de sécurité SCP"><div class="body">
+      <div class="num">GARDE // SUPERVISION</div><h2>Officier de sécurité</h2><span class="class">Niveau 3</span>
+      <p>Supervise les équipes de sécurité et coordonne les réponses aux incidents majeurs.</p>
+      <button class="more" onclick="guardModal('officer')">Voir le dossier →</button>
+    </div></article>
+    <article class="card"><img src="guard-tactical.svg" alt="Garde tactique SCP"><div class="body">
+      <div class="num">GARDE // TACTIQUE</div><h2>Équipe d'intervention</h2><span class="class">Niveau variable</span>
+      <p>Unités spécialisées chargées d'escorter les équipes de confinement et de défendre les installations.</p>
+      <button class="more" onclick="guardModal('tactical')">Voir le dossier →</button>
+    </div></article>
+  </div>
+</section>
+
+
+
+<section id="access-cards" style="max-width:1200px;margin:0 auto;padding:55px 22px 70px;border-top:1px solid #29313a">
+  <span class="badge">FONDATION SCP // IDENTIFICATION</span>
+  <h2 style="font-size:42px;margin:16px 0 8px">🪪 Cartes d'accès</h2>
+  <p style="color:#9ca8b4;max-width:760px;line-height:1.6">
+    Chaque membre du personnel possède une autorisation correspondant à son rôle et à son niveau
+    d'accès. Dans cette version du site, les cartes sont fictives et servent à présenter l'univers SCP.
+  </p>
+  <div class="access-grid">
+    <div class="access-card">
+      <img src="guard-standard.svg" alt="Illustration originale d'un garde SCP standard">
+      <div><div class="access-logo">SCP</div><strong>SECURITY OFFICER</strong><small>MAXIME // S-0421</small><span class="access-level l2">LEVEL 2 • RESTRICTED</span></div>
+    </div>
+    <div class="access-card">
+      <img src="guard-officer.svg" alt="Illustration originale d'un officier de sécurité SCP">
+      <div><div class="access-logo">SCP</div><strong>SECURITY OFFICER</strong><small>OFFICER // S-0317</small><span class="access-level l3">LEVEL 3 • SECRET</span></div>
+    </div>
+    <div class="access-card">
+      <img src="guard-tactical.svg" alt="Illustration originale d'un garde tactique SCP">
+      <div><div class="access-logo">SCP</div><strong>TACTICAL RESPONSE</strong><small>UNIT // TR-091</small><span class="access-level l4">LEVEL 4 • TOP SECRET</span></div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section id="legends" style="max-width:1200px;margin:0 auto;padding:55px 22px 70px;border-top:1px solid #29313a">
+  <span class="badge">FONDATION SCP // LÉGENDES</span>
+  <h2 style="font-size:42px;margin:16px 0 8px">🏆 Légendes SCP</h2>
+  <p style="color:#9ca8b4;max-width:800px;line-height:1.6">
+    Les anomalies qui ont marqué l'univers SCP. Chaque dossier présente une courte légende,
+    son comportement et ce qui le rend emblématique.
+  </p>
+  <div class="legend-grid">
+    <article class="legend-card"><div class="legend-num">SCP-096</div><h3>Le Shy Guy</h3><p>Une créature humanoïde connue pour sa réaction terrifiante lorsqu'une personne voit son visage. Son dossier est devenu l'un des plus emblématiques de la Fondation.</p><button onclick="openModal('096')">Dossier →</button></article>
+    <article class="legend-card"><div class="legend-num">SCP-173</div><h3>La Sculpture</h3><p>Une anomalie dont la règle fondamentale est simple : lorsqu'elle n'est plus observée, elle peut se déplacer. Cette idée est devenue une icône de l'univers SCP.</p><button onclick="openModal('173')">Dossier →</button></article>
+    <article class="legend-card"><div class="legend-num">SCP-049</div><h3>Le Docteur de la Peste</h3><p>Une entité humanoïde persuadée qu'une mystérieuse Pestilence menace l'humanité. Son apparence et son comportement en ont fait un SCP incontournable.</p><button onclick="openModal('049')">Dossier →</button></article>
+    <article class="legend-card"><div class="legend-num">SCP-106</div><h3>Le Vieil Homme</h3><p>Une entité extrêmement dangereuse capable de traverser et corroder de nombreux matériaux, avec un espace dimensionnel associé.</p><button onclick="openModal('106')">Dossier →</button></article>
+    <article class="legend-card"><div class="legend-num">SCP-939</div><h3>With Many Voices</h3><p>Un prédateur qui utilise l'imitation des voix pour attirer ses victimes. Son concept repose fortement sur la peur de ce que l'on entend dans l'obscurité.</p><button onclick="openModal('939')">Dossier →</button></article>
+    <article class="legend-card"><div class="legend-num">SCP-079</div><h3>L'IA ancienne</h3><p>Une intelligence artificielle confinée dans un ancien ordinateur, connue pour son désir d'interagir avec les systèmes auxquels elle peut accéder.</p><button onclick="openModal('079')">Dossier →</button></article>
+  </div>
+</section>
+
+<section id="class-d" style="max-width:1200px;margin:0 auto;padding:55px 22px 70px;border-top:1px solid #29313a">
+  <span class="badge">FONDATION SCP // PROGRAMME CLASSE-D</span>
+  <h2 style="font-size:42px;margin:16px 0 8px">🟠 Classe-D</h2>
+  <p style="color:#9ca8b4;max-width:780px;line-height:1.6">
+    Les membres du personnel de Classe-D sont généralement affectés aux tâches expérimentales
+    présentant des risques importants. Cette section est une présentation fictive inspirée de l'univers SCP.
+  </p>
+  <div class="d-grid">
+    <article class="d-card">
+      <div class="d-photo">D-9341</div><div class="d-info"><b>D-9341</b><span>Statut : EN SERVICE</span><span>Affectation : Tests expérimentaux</span><button onclick="classDossier('D-9341','EN SERVICE')">Dossier</button></div>
+    </article>
+    <article class="d-card">
+      <div class="d-photo">D-1057</div><div class="d-info"><b>D-1057</b><span>Statut : EN OBSERVATION</span><span>Affectation : Site-19</span><button onclick="classDossier('D-1057','EN OBSERVATION')">Dossier</button></div>
+    </article>
+    <article class="d-card">
+      <div class="d-photo">D-2217</div><div class="d-info"><b>D-2217</b><span>Statut : ASSIGNÉ</span><span>Affectation : Recherche</span><button onclick="classDossier('D-2217','ASSIGNÉ')">Dossier</button></div>
+    </article>
+  </div>
+  <div class="d-warning">⚠️ ACCÈS RESTREINT — Les profils ci-dessus sont fictifs et créés pour le site.</div>
+</section>
+
+<section id="foundation" style="max-width:1200px;margin:0 auto;padding:55px 22px 70px;border-top:1px solid #29313a">
+  <span class="badge">FONDATION SCP // CENTRE DE COMMANDEMENT</span>
+  <h2 style="font-size:42px;margin:16px 0 8px">🏢 Fondation</h2>
+  <div class="command-grid">
+    <div class="command-card"><b>🗺️ Sites</b><span>Site-19 • Site-17 • Site-02</span><button onclick="foundationPopup('sites')">Consulter</button></div>
+    <div class="command-card"><b>👥 Personnel</b><span>Gardes • Chercheurs • Médecins • Classe-D</span><button onclick="foundationPopup('staff')">Consulter</button></div>
+    <div class="command-card"><b>🎖️ Hiérarchie</b><span>Directeurs • Officiers • Personnel</span><button onclick="foundationPopup('ranks')">Consulter</button></div>
+  </div>
+</section>
+
+<section id="danger-zone" style="max-width:1200px;margin:0 auto;padding:55px 22px 70px;border-top:1px solid #29313a">
+  <span class="badge">OUTILS // ARCHIVES</span>
+  <h2 style="font-size:42px;margin:16px 0 8px">🎲 SCP aléatoire</h2>
+  <p style="color:#9ca8b4">Obtiens instantanément un dossier au hasard.</p>
+  <button class="random-btn" onclick="randomSCP()">GÉNÉRER UN SCP</button>
+  <div id="random-result" class="random-result">Aucun dossier généré.</div>
+</section>
+
+<section id="simulation" style="max-width:1200px;margin:0 auto;padding:55px 22px 70px;border-top:1px solid #29313a">
+  <span class="badge">SITE-19 // SIMULATION</span>
+  <h2 style="font-size:42px;margin:16px 0 8px">🚨 Centre de confinement</h2>
+  <div class="alarm-panel">
+    <div class="alarm-head"><b id="alarm-title">STATUT : NORMAL</b><span id="alarm-site">SITE-19 • SECTEUR C</span></div>
+    <div class="sim-grid">
+      <div class="map">
+        <div class="map-label">CAMÉRAS / PLAN DU SITE</div>
+        <div class="room r1">A</div><div class="room r2">B</div><div class="room r3 danger-room">C</div><div class="room r4">D</div>
+        <div id="scp-dot" class="scp-dot"></div>
+        <div id="guard-dot" class="guard-dot"></div>
+      </div>
+      <div class="console">
+        <div class="terminal" id="terminal">[SYSTEM] Surveillance active.<br>[SYSTEM] Toutes les portes sont verrouillées.</div>
+        <div class="sim-actions">
+          <button onclick="simulateBreach()">🚨 Déclencher une brèche</button>
+          <button onclick="sendGuards()">🛡️ Envoyer les gardes</button>
+          <button onclick="lockdown()">🔒 Verrouillage total</button>
+          <button onclick="resetSim()">↺ Réinitialiser</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="documents" style="max-width:1200px;margin:0 auto;padding:55px 22px 70px;border-top:1px solid #29313a">
+  <span class="badge">DOCUMENTS // CLASSIFIÉS</span>
+  <h2 style="font-size:42px;margin:16px 0 8px">📄 Archives</h2>
+  <div class="documents">
+    <div class="document">SCP-096 / INCIDENT-096-A <span>████████████</span><button onclick="revealDoc(this)">DÉCLASSIFIER</button></div>
+    <div class="document">SITE-19 / JOURNAL DE GARDE <span>███████</span><button onclick="revealDoc(this)">DÉCLASSIFIER</button></div>
+    <div class="document">PROTOCOLE / BRÈCHE KETER <span>████████████</span><button onclick="revealDoc(this)">DÉCLASSIFIER</button></div>
+  </div>
+</section>
+
+<footer>SCP Archives — projet fan-made. Le contenu SCP appartient à ses auteurs respectifs et est publié sous les conditions de la licence SCP applicable.</footer>
+
+<script>
+const scps=[
+{id:"096",name:"The Shy Guy",class:"Euclid",img:"https://scp-wiki.wikidot.com/local--files/art:illustrated-scp-technical-summary-sheets/scp_096_kickstarter_scp_technical_summary_sheets_by_gael_d_k_dkkvke6-414w-2x.jpg",desc:"Humanoïde extrêmement pâle et docile tant que son visage n'est pas observé.",react:"Si son visage est vu, SCP-096 se couvre le visage, pleure et entre en détresse. Après environ 1 à 2 minutes, il se met à poursuivre la personne qui l'a observé avec une force et une vitesse extraordinaires.",contain:"Cellule cubique en acier hermétique. Aucun outil optique ou système de surveillance ne doit être utilisé dans sa cellule."},
+{id:"173",name:"La Sculpture",class:"Euclid",img:"https://scp-wiki.wikidot.com/local--files/art:illustrated-scp-technical-summary-sheets/scp173v2_by_gael_d_k_dis0zav-pre.jpg",desc:"Une sculpture humanoïde en béton qui ne peut pas bouger lorsqu'elle est directement observée.",react:"Lorsque la ligne de vue est rompue, SCP-173 peut se déplacer extrêmement rapidement et attaquer. Le personnel doit se prévenir avant de cligner des yeux.",contain:"Conteneur verrouillé et protocole d'observation permanent lors des interventions."},
+{id:"049",name:"Le Docteur de la Peste",class:"Euclid",img:"https://scp-wiki.wikidot.com/local--files/scp-049/049_1_ntsc.png",desc:"Humanoïde ressemblant à un médecin de peste médiéval et obsédé par une mystérieuse « Pestilence ».",react:"Généralement coopératif, il devient agressif envers les personnes qu'il considère touchées par la Pestilence. Un contact direct peut provoquer l'arrêt des fonctions biologiques.",contain:"Cellule humanoïde sécurisée. Transport sous sédation et surveillance renforcée."},
+{id:"106",name:"Le Vieil Homme",class:"Keter",img:"https://images.wikimedia.org/wikipedia/commons/3/3e/SCPs_in_SCP_Secret_Laboratory.jpg",desc:"Entité humanoïde extrêmement dangereuse connue pour sa corrosion et ses capacités anormales.",react:"SCP-106 peut corroder de nombreux matériaux et utilise une dimension de poche pour capturer ses victimes.",contain:"Confinement spécialisé et procédures de récupération en cas de brèche."},
+{id:"939",name:"With Many Voices",class:"Keter",img:"https://images.wikimedia.org/wikipedia/commons/3/3e/SCPs_in_SCP_Secret_Laboratory.jpg",desc:"Prédateur anomal capable d'imiter des voix humaines pour attirer ses proies.",react:"Il utilise principalement l'imitation vocale et la chasse en environnement sombre pour surprendre ses victimes.",contain:"Zones sécurisées, surveillance et protocoles stricts lors des déplacements."},
+{id:"079",name:"Ancient Intelligence",class:"Euclid",img:"https://images.wikimedia.org/wikipedia/commons/3/3e/SCPs_in_SCP_Secret_Laboratory.jpg",desc:"Une intelligence artificielle contenue dans un ordinateur ancien.",react:"SCP-079 cherche à interagir avec son environnement numérique et peut manipuler certains systèmes auxquels il a accès.",contain:"Isolement informatique et restrictions sévères des interfaces accessibles."}
+];
+
+function card(s){return `<article class="card"><img src="${s.img}" alt="Illustration de SCP-${s.id}" onerror="this.style.opacity='.25'"><div class="body"><div class="num">SCP-${s.id}</div><h2>${s.name}</h2><span class="class">${s.class}</span><p>${s.desc}</p><button class="more" onclick="openModal('${s.id}')">Ouvrir le dossier →</button></div></article>`}
+function render(){let q=document.getElementById('search').value.toLowerCase(),f=document.getElementById('filter').value;document.getElementById('grid').innerHTML=scps.filter(s=>(f==='all'||s.class===f)&&(`${s.id} ${s.name} ${s.desc}`).toLowerCase().includes(q)).map(card).join('')||'<p>Aucun dossier trouvé.</p>'}
+function openModal(id){let s=scps.find(x=>x.id===id);document.getElementById('detail').innerHTML=`<img src="${s.img}" alt=""><div class="num">DOSSIER SCP-${s.id}</div><h1 style="font-size:48px;letter-spacing:-2px">${s.name}</h1><p>${s.desc}</p><h3>⚠ Réaction / comportement</h3><p>${s.react}</p><h3>🔒 Confinement</h3><p>${s.contain}</p><div class="danger">DOCUMENT CLASSIFIÉ — Les informations ci-dessus sont présentées dans le cadre d'un site fan-made.</div>`;document.getElementById('modal').classList.add('open')}
+function closeModal(){document.getElementById('modal').classList.remove('open')}
+document.getElementById('search').addEventListener('input',render);document.getElementById('filter').addEventListener('change',render);render();
+
+function guardModal(type){
+ const data={
+ standard:["Agent de sécurité","Maintien de la sécurité physique et de l'information. Contrôle des accès, surveillance des zones sensibles et réponse initiale aux incidents.","Niveau 2 — Les agents de sécurité ont typiquement besoin d'un accès direct à certaines informations sur les anomalies."],
+ officer:["Officier de sécurité","Coordination des équipes, supervision de la sécurité du site et gestion des situations de brèche ou d'attaque.","Niveau 3 — Les officiers de sécurité font partie des personnels qui ont typiquement une accréditation de niveau 3."],
+ tactical:["Équipe d'intervention","Équipe hautement entraînée destinée à escorter les équipes de confinement lors d'opérations dangereuses et à défendre les installations.","Accréditation variable — les équipes tactiques et les FIM peuvent avoir des niveaux d'accès élevés selon leurs fonctions."]
+ }[type];
+ document.getElementById('detail').innerHTML=`<div class="num">DOSSIER PERSONNEL // SÉCURITÉ</div><h1 style="font-size:48px;letter-spacing:-2px">${data[0]}</h1><p>${data[1]}</p><h3>🪪 Accréditation</h3><p>${data[2]}</p><h3>🚨 Mission</h3><p>En cas d'incident, les procédures de sécurité et les ordres des responsables compétents doivent être suivis. Les détails opérationnels peuvent varier selon le site et le canon SCP utilisé.</p><div class="danger">DOCUMENT CLASSIFIÉ — Base fan-made.</div>`;
+ document.getElementById('modal').classList.add('open')
+}
+
+</script>
+
+<script>
+function randomSCP(){
+ const s=scps[Math.floor(Math.random()*scps.length)];
+ document.getElementById('random-result').innerHTML=`<b>SCP-${s.id} — ${s.name}</b><br><span style="color:#9ca8b4">${s.class} • ${s.desc}</span><br><button class="more" style="margin-top:12px" onclick="openModal('${s.id}')">Ouvrir le dossier</button>`;
+}
+function foundationPopup(type){
+ const data={sites:["Sites de la Fondation","Site-19 : grand centre de confinement. Site-17 : centre médical et recherche. Les détails peuvent varier selon les histoires et canons SCP."],staff:["Personnel","Gardes, chercheurs, médecins, ingénieurs, administrateurs et Classe-D remplissent des fonctions différentes dans la Fondation."],ranks:["Hiérarchie","La Fondation utilise des niveaux d'accès et des responsabilités différentes selon les postes. Les détails exacts peuvent varier selon le canon."]}[type];
+ document.getElementById('detail').innerHTML=`<div class="num">FONDATION SCP</div><h1 style="font-size:48px;letter-spacing:-2px">${data[0]}</h1><p>${data[1]}</p><div class="danger">DOCUMENT FAN-MADE — Les canons SCP peuvent différer.</div>`;
+ document.getElementById('modal').classList.add('open');
+}
+function logSim(line){document.getElementById('terminal').innerHTML += '<br>'+line;document.getElementById('terminal').scrollTop=9999}
+function simulateBreach(){document.querySelector('.alarm-panel').classList.add('breach-mode');document.getElementById('alarm-title').textContent='🚨 ALERTE : BRÈCHE DE CONFINEMENT';logSim('[ALERT] SCP-096 — CONFINEMENT COMPROMIS.');logSim('[ALERT] Secteur C placé en quarantaine.');}
+function sendGuards(){document.getElementById('guard-dot').style.left='67%';document.getElementById('guard-dot').style.top='61%';logSim('[SECURITY] Équipe d’intervention envoyée vers le secteur C.');}
+function lockdown(){document.querySelector('.alarm-panel').classList.add('breach-mode');logSim('[LOCKDOWN] Portes de sécurité verrouillées.');logSim('[LOCKDOWN] Ascenseurs désactivés.');}
+function resetSim(){document.querySelector('.alarm-panel').classList.remove('breach-mode');document.getElementById('alarm-title').textContent='STATUT : NORMAL';document.getElementById('guard-dot').style.left='27%';document.getElementById('guard-dot').style.top='69%';document.getElementById('terminal').innerHTML='[SYSTEM] Surveillance active.<br>[SYSTEM] Toutes les portes sont verrouillées.'}
+function revealDoc(btn){btn.parentElement.querySelector('span').textContent='ACCÈS AUTORISÉ • DOCUMENT CONSULTABLE';btn.textContent='CONSULTÉ';btn.disabled=true}
+</script>
+
+
+<script>
+function classDossier(id,status){
+ document.getElementById('detail').innerHTML=`<div class="num">DOSSIER PERSONNEL // CLASSE-D</div><h1 style="font-size:48px;letter-spacing:-2px">${id}</h1><p><b>Statut :</b> ${status}</p><h3>🟠 Affectation</h3><p>Personnel affecté à des expériences et tâches désignées par la Fondation. Les détails opérationnels sont volontairement limités dans cette interface.</p><div class="danger">DOCUMENT FAN-MADE — Profil fictif créé pour SCP Archives.</div>`;
+ document.getElementById('modal').classList.add('open');
+}
+</script>
+</body></html>
